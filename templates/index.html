@@ -9,9 +9,36 @@
     <link rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}">
 </head>
-
+<a href="https://wa.me/918378934221"
+   class="whatsapp"
+   target="_blank">
+   💬
+</a>
 <body>
+<div id="popup">
 
+    <div class="popup-content">
+
+        <span class="close-btn"
+              onclick="closePopup()">
+              ×
+        </span>
+
+        <h2>Free Study Abroad Consultation</h2>
+
+        <p>
+            Contact us today and start your international education journey.
+        </p>
+
+        <a href="#contact"
+           class="btn"
+           onclick="closePopup()">
+            Contact Us
+        </a>
+
+    </div>
+
+</div>
     <!-- NAVBAR -->
 
     <nav>
@@ -22,7 +49,7 @@
                 alt="Logo"
                 class="logo">
 
-           <div class="brand-text">
+            <<div class="brand-text">
 
     <h1 class="brand-name">
         LOCAL TO GLOBAL
@@ -301,7 +328,6 @@
             </div>
 
         </div>
-    </section>
 
     
     <!-- WHY CHOOSE US -->
@@ -455,6 +481,27 @@
     </p>
 
 </footer>
+<script>
+
+window.onload = function(){
+
+    setTimeout(function(){
+
+        document.getElementById("popup")
+        .style.display = "flex";
+
+    },3000);
+
+}
+
+function closePopup(){
+
+    document.getElementById("popup")
+    .style.display = "none";
+
+}
+
+</script>
 </body>
 
 </html>
