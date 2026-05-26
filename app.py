@@ -3,8 +3,10 @@ import sqlite3
 import csv
 from io import StringIO
 from flask import Response
+from flask import session
 
 app = Flask(__name__)
+app.secret_key = "LocalToGlobal2026"
 
 # ---------------------------
 # DATABASE INITIALIZATION
@@ -115,9 +117,41 @@ def submit():
 # ---------------------------
 # ADMIN DASHBOARD
 # ---------------------------
+@app.route("/login", methods=["GET", "POST"])
+def login():
 
+    if request.method == "POST":
+
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username == "admin" and password == "LocalToGlobal@123":
+            session["admin"] = True
+            return redirect("/admin")
+
+        return """
+        <h2>Invalid Login</h2>
+        <a href='/login'>Try Again</a>
+        """
+
+    return """
+    <h2>Admin Login</h2>
+
+    <form method='POST'>
+        <input type='text' name='username' placeholder='Username'>
+        <br><br>
+
+        <input type='password' name='password' placeholder='Password'>
+        <br><br>
+
+        <button type='submit'>Login</button>
+    </form>
+    """
 @app.route("/admin")
 def admin():
+
+    if not session.get("admin"):
+        return redirect("/login")
 
     conn = sqlite3.connect("students.db")
     cursor = conn.cursor()
